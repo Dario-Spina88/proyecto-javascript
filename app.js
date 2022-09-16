@@ -1,325 +1,79 @@
 
-class entrada {
-    constructor(id, festival, detalle, precio) {
+class Entrada {
+    constructor(id, evento, detalle, precio) {
     this.id = id;
-    this.festival = festival;
+    this.evento = evento;
     this.detalle = detalle;
     this.precio = precio;
     }
+    mostrarEntrada() {
+    return (
+        this.id + " " + this.evento + " " + this.detalle + " $" + this.precio);
+    }
 }
 
-const entradas = [
-    new entrada(1, "Teatro", "Niños", 4000),
-    new entrada(2, "Teatro", "Adultos", 5000),
-    new entrada(3, "Recital", "Electronica", 6000),
-    new entrada(4, "Recital", "Rock", 4500),
-    new entrada(5, "Recital", "Reggae", 3000),
-];
+let entrada1 = new Entrada("1)", "Teatro", "Para Niño/a", 4000);
+let entrada2 = new Entrada("2)", "Teatro", "Para Adulto/a", 5000);
+let entrada3 = new Entrada("3)", "Recital", "Electronica", 6000);
+let entrada4 = new Entrada("4)", "Recital", "Rock", 4500);
+let entrada5 = new Entrada("5)", "Recital", "Reggae", 3000);
 
-entradas.forEach((entrada) => console.log(entrada));
 
-//--------------------------------------------------------------------------
-// let tarjetaDatos = "";
-// total = 0;
+    class InfoCompra {
+    constructor(entrada, cantidad) {
+        this.entrada = entrada;
+        this.cantidad = cantidad;
+    }
+    mostrarInfo() {
+        return (this.cantidad +"x "+this.entrada.evento +" "+this.entrada.detalle +"($"+this.calcularSubtotalInfo()+")"
+        );
+    }
+    calcularSubtotalInfo() {
+      return this.cantidad * this.entrada.precio;
+    }
+    }
 
-// function tipoEntradas(){
-//     let listaEntradas = Number(prompt(`Que entrada desea adquirir:
-//     1 - Recital de Cumbia / campo $4000
-//     2 - Recital de Electronica / campo $5000
-//     3 - Recital de Rock / campo $4500
-//     4 - Recital de Reggae / campo $3500
-//     5 - Recital de Reggaeton / campo $3000`));
-//     let entrada = 0;1
-//     let precio = 0;
-//     let tarjeta = 0;
-//     let tranferencia = 0;
-//     let confirmar = "";
+    let info1 = new InfoCompra(entrada1, 1);
+    let info2 = new InfoCompra(entrada2, 1);
+    let info3 = new InfoCompra(entrada3, 4);
+    let info4 = new InfoCompra(entrada4, 1);
+    let info5 = new InfoCompra(entrada5, 3);
 
-//     switch(listaEntradas){
 
-//         case 1 :
-//             alert("Comprar entrada recital de cumbia");
-//             entrada = Number(prompt("Total de entradas"));
-//             precio = 4000;
-//             total = totalPago(entrada, precio);
-//             alert(`Monto total a abonar $${total}`);
-//             confirmar = Number(prompt("Metodo de pago \n1 - Tarjeta \n2 - Tranferencia \n3 - Salir"));
+    class Finalizar {
+    constructor(fecha, informacion) {
+        this.fecha = fecha;
+        this.informacion = informacion;
+    }
+    calcularTotal() {
+        let resultado = 0;
+        for (let i = 0; i < this.informacion.length; i++) {
+        let ic = this.informacion[i];
+        resultado = resultado + ic.calcularSubtotalInfo();
+        }
+        return resultado;
+    }
+    mostrarInfo() {
+        let resultado = " ";
+        for (const ic of this.informacion) {
+        resultado += ic.mostrarInfo() + "\n";
+        }
+        resultado += "Total: $" + this.calcularTotal();
+        return resultado;
+    }
+    } 
 
-//             if (confirmar == 1){
-//                 alert("Datos de la tarjeta");
-//                 numeroTarjeta = Number(prompt("Numero de su Tarjeta"));
+    let informacion1 = [];
+    informacion1.push(info1);
+    informacion1.push(info2);
+    informacion1.push(info3);
+    informacion1.push(info4);
+    informacion1.push(info5);
 
-//                 nombreTarjeta = prompt("Nombre y Apellido de su tarjeta");
+    let finalizar1 = new Finalizar(new Date(), informacion1);
+    let finalizar2 = new Finalizar(new Date(), informacion1);
+    let finalizar3 = new Finalizar(new Date(), informacion1);
+    let finalizar4 = new Finalizar(new Date(), informacion1);
+    let finalizar5 = new Finalizar(new Date(), informacion1);
 
-//                 tarjetaDatos = datosTarjeta(`\n${numeroTarjeta}, \n${nombreTarjeta}`);
-
-//                 alert(`Su tarjeta es ${tarjetaDatos}`);
-
-//                 importe = Number(prompt(`El importe es $${total}`, "Ingrese el importe ¡AQUI!"));
-
-//                 cuotas = Number(prompt("Numero de cuotas 3 / 6"));
-
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-
-//                 if(confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else if(confirmar == 2){
-//                 alert("Usted selecciono tranferencia");
-//                 tranferencia = Number(prompt(`El monto de la tranferencia es $${total}`, "Ingrese el Importe ¡AQUI!"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-
-//                 if (confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else{
-//                 alert("Usted ha salido.");
-//             }
-//             break;
-
-//             case 2 :
-//             alert("Comprar entrada recital de Electronica");
-//             entrada = Number(prompt("Total de entradas"));
-//             precio = 5000;
-//             total = totalPago(entrada, precio);
-//             alert(`Monto total a abonar $${total}`);
-//             confirmar = Number(prompt("Metodo de pago \n1 - Tarjeta \n2 - Tranferencia \n3 - Salir"));
-
-//             if (confirmar == 1){
-//                 alert("Datos de la tarjeta");
-//                 numeroTarjeta = Number(prompt("Numero de su Tarjeta"));
-//                 nombreTarjeta = prompt("Nombre y Apellido de su tarjeta");
-//                 tarjetaDatos = datosTarjeta(`\n${numeroTarjeta}, \n${nombreTarjeta}`);
-//                 alert(`Su tarjeta es ${tarjetaDatos}`);
-//                 importe = Number(prompt(`El importe es $${total}`, "Ingrese el importe ¡AQUI!"));
-//                 cuotas = Number(prompt("Numero de cuotas 3 / 6"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-//                 if(confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else if(confirmar == 2){
-//                 alert("Usted selecciono tranferencia");
-//                 tranferencia = Number(prompt(`El monto de la tranferencia es $${total}`, "Ingrese el Importe ¡AQUI!"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-
-//                 if (confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else{
-//                 alert("Usted ha salido.");
-//             }
-//             break;
-
-//             case 3 :
-//             alert("Comprar entrada recital de Rock");
-//             entrada = Number(prompt("Total de entradas"));
-//             precio = 4500;
-//             total = totalPago(entrada, precio);
-//             alert(`Monto total a abonar $${total}`);
-//             confirmar = Number(prompt("Metodo de pago \n1 - Tarjeta \n2 - Tranferencia \n3 - Salir"));
-
-//             if (confirmar == 1){
-//                 alert("Datos de la tarjeta");
-//                 numeroTarjeta = Number(prompt("Numero de su Tarjeta"));
-//                 nombreTarjeta = prompt("Nombre y Apellido de su tarjeta");
-//                 tarjetaDatos = datosTarjeta(`\n${numeroTarjeta}, \n${nombreTarjeta}`);
-//                 alert(`Su tarjeta es ${tarjetaDatos}`);
-//                 importe = Number(prompt(`El importe es $${total}`, "Ingrese el importe ¡AQUI!"));
-//                 cuotas = Number(prompt("Numero de cuotas 3 / 6"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-//                 if(confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else if(confirmar == 2){
-//                 alert("Usted selecciono tranferencia");
-//                 tranferencia = Number(prompt(`El monto de la tranferencia es $${total}`, "Ingrese el Importe ¡AQUI!"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-
-//                 if (confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else{
-//                 alert("Usted ha salido.");
-//             }
-//             break;
-
-//             case 4 :
-//             alert("Comprar entrada recital de Reggae");
-//             entrada = Number(prompt("Total de entradas"));
-//             precio = 3500;
-//             total = totalPago(entrada, precio);
-//             alert(`Monto total a abonar $${total}`);
-//             confirmar = Number(prompt("Metodo de pago \n1 - Tarjeta \n2 - Tranferencia \n3 - Salir"));
-
-//             if (confirmar == 1){
-//                 alert("Datos de la tarjeta");
-//                 numeroTarjeta = Number(prompt("Numero de su Tarjeta"));
-//                 nombreTarjeta = prompt("Nombre y Apellido de su tarjeta");
-//                 tarjetaDatos = datosTarjeta(`\n${numeroTarjeta}, \n${nombreTarjeta}`);
-//                 alert(`Su tarjeta es ${tarjetaDatos}`);
-//                 importe = Number(prompt(`El importe es $${total}`, "Ingrese el importe ¡AQUI!"));
-//                 cuotas = Number(prompt("Numero de cuotas 3 / 6"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-//                 if(confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else if(confirmar == 2){
-//                 alert("Usted selecciono tranferencia");
-//                 tranferencia = Number(prompt(`El monto de la tranferencia es $${total}`, "Ingrese el Importe ¡AQUI!"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-
-//                 if (confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else{
-//                 alert("Usted ha salido.");
-//             }
-//             break;
-
-//             case 5 :
-//             alert("Comprar entrada recital de Reggaeton");
-//             entrada = Number(prompt("Total de entradas"));
-//             precio = 3000;
-//             total = totalPago(entrada, precio);
-//             alert(`Monto total a abonar $${total}`);
-//             confirmar = Number(prompt("Metodo de pago \n1 - Tarjeta \n2 - Tranferencia \n3 - Salir"));
-
-//             if (confirmar == 1){
-//                 alert("Datos de la tarjeta");
-//                 numeroTarjeta = Number(prompt("Numero de su Tarjeta"));
-//                 nombreTarjeta = prompt("Nombre y Apellido de su tarjeta");
-//                 tarjetaDatos = datosTarjeta(`\n${numeroTarjeta}, \n${nombreTarjeta}`);
-//                 alert(`Su tarjeta es ${tarjetaDatos}`);
-//                 importe = Number(prompt(`El importe es $${total}`, "Ingrese el importe ¡AQUI!"));
-//                 cuotas = Number(prompt("Numero de cuotas 3 / 6"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-//                 if(confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else if(confirmar == 2){
-//                 alert("Usted selecciono tranferencia");
-//                 tranferencia = Number(prompt(`El monto de la tranferencia es $${total}`, "Ingrese el Importe ¡AQUI!"));
-//                 confirmar = Number(prompt("1 pagar \n2 no pagar"));
-
-//                 if (confirmar == 1){
-//                     alert(`Se concreto su compra!! $${total}`);
-//                     alert("Felicidades ¡¡¡Compro su entrada!!! espere el mail con su entrada, saludos.");
-//                 }
-//                 else {
-//                     alert(`Cancelo la compra!! $${total}`);
-//                 }
-//             }
-//             else{
-//                 alert("Usted ha salido.");
-//             }
-//             break;
-//     }
-// }
-
-// tipoEntradas();
-
-// function datosTarjeta(numeroTarjeta, nombreTarjeta){
-//     tarjeta = numeroTarjeta + nombreTarjeta
-//     return tarjeta;
-// }
-
-// function pago(importe, cuotas){
-//     resultado = importe / cuotas;
-//     return resultado
-// }
-
-// function totalPago(entrada,precio){
-//     total = entrada * precio
-//     return total;
-// }
-
-// ------------------------------------------------------------------
-
-// function entrada (nombre, precio, id, detalle){
-//         this.id = id;
-//         this.nombre = nombre;
-//         this.detalle = detalle;
-//         this.precio = precio;
-
-//     this.mostrarEntradas = function(){
-//         alert(`Tenemos ${this.detalle} entradas disponibles.`);
-//     }
-//     this.realizarVenta = function(){
-//         this.inventario--
-//         alert("Venta realizada con exito.")
-//     }
-//     this.agregarEntradas = function(cantidad){
-//         this.detalle+= cantidad
-//         alert(`Has agregado ${cantidad} ${this.nombre} al inventario`)
-//     }
-// }
-
-// let entradas = [
-//     new entrada(1, "Teatro", "Niños", 4000),
-//     new entrada(2, "Teatro", "Adultos", 5000),
-//     new entrada(3, "Recital", "Electronica", 6000),
-//     new entrada(4, "Recital", "Rock", 4500),
-//     new entrada(5, "Recital", "Reggae", 3000),
-// ]
-
-// let carrito = []
-
-// function agregarCarrito() {
-//     let entradaId = Number(prompt(`Marque la entrada`));
-//     let cantidad = Number(prompt(`Marque la cantidad`));
-//     let entrada = entradas.find(entrad => entrad.id===entradaId)
-//     entrada.cantidad = cantidad
-//     entrada.total = entrada.precio * cantidad
-//     carrito.push(entrada)
-// }
-
-// agregarCarrito()
-
-// console.log(carrito)
-
-// -----------------------------------------------------------------------------------------------------
+    console.log(finalizar1.calcularTotal());
