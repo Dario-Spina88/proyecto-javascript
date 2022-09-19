@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Oswald", sans-serif;
+}
+
+body{
+    background-image: url(/img/fondo.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.tarjeta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    margin: 15px;
+    background-color: rgb(202, 190, 151);
+    height: 550px;
+    width: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.card-img{
+    margin: 5px;
+    width: 90%;
+    height: fit-content;
+    border-radius: 10px;
+}
+
+.card h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn{
+    margin: 5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer{
+    display:flex;
+    justify-content: center;
+    background-color: rgba(250, 235, 215, 0.589);
+}
