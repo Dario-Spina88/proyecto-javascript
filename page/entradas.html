@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- links -->
+    <!------------- links ---------------->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
 
     <title>Ticket-IN</title>
 </head>
+
+<!----------------- Navegador --------------->
 
 <body>
     <header>
@@ -47,19 +49,54 @@
     <main>
         <h1>Pagina para sacar tu entrada</h1>
 
+
+        <!---------------- Tarjetas ---------------->
+
         <section id="tarjeta">
             <template>
                 <article class="card">
-                    <img src="..." class="card-img" alt="teatro para niños" />
-                    <h2 class="card-title">Teatro para niños</h2>
+                    <img src="..." class="card-img" alt="" />
+                    <h2 class="card-titulo">Teatro para niños</h2>
                     <p class="card-text">Funciones para los peques de la familia</p>
-                    <p class="card-text">Precio</p>
+                    <p class="card-precio">Precio</p>
                     <p class="card-text">Cantidad</p>
-                    <button class="comprar btn btn-success" type="button">Comprar</button>
-                    <button class="vaciar btn btn-danger" type="button">Vaciar</button>
+                    <button id="comprar" class="btn btn-success" type="button">AÑADIR AL CARRITO</button>
                 </article>
             </template>
         </section>
+
+
+        <!--------------- Carrito ----------------->
+
+        <div class="compra-carro-entradas  compraCarroEntradasContainer">
+        </div>
+        <section id="carrito">
+            <div class="container">
+                <h2 class="text-center">CARRITO</h2>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="compra-carro-header">
+                            <h3>Producto</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="compra-carro-header">
+                            <h3 class="text-truncate">Precio</h3>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="compra-carro-header">
+                            <h3>Cantidad</h3>
+                        </div>
+                    </div>
+                </div>
+
+            
+            </div>
+        </section>
+
     </main>
 
     <footer>
@@ -72,7 +109,6 @@
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
         crossorigin="anonymous"></script>
     <script src="../js/index.js"></script>
-    <script src="../js/data.js"></script>
 </body>
 
 </html>

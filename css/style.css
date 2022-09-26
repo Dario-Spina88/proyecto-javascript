@@ -13,7 +13,7 @@ body{
     background-attachment: fixed;
 }
 
-.tarjeta{
+#tarjeta{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +31,7 @@ body{
 }
 
 .card-img{
-    margin: 5px;
+    /* margin: 5px; */
     width: 90%;
     height: fit-content;
     border-radius: 10px;
@@ -50,8 +50,29 @@ body{
     align-items: center;
 }
 
+#carrito{
+    background-color: #ccc;
+}
+
+
 footer{
     display:flex;
     justify-content: center;
     background-color: rgba(250, 235, 215, 0.589);
 }
+
+
+
+/* a.openModal { 
+    margin: 1em auto; 
+    display: block; 
+    width: 200px; 
+    background: #ccc; 
+    text-align: center; 
+    text-decoration: none; 
+    color: black; 
+    padding: 10px; 
+    text-shadow: 0 1px 0 #fff; 
+    border: 1px solid rgba(0,0,0,0.1); 
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3); 
+} */
