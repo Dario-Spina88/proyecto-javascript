@@ -13,29 +13,17 @@ body{
     background-attachment: fixed;
 }
 
-#tarjeta{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .card {
     margin: 15px;
     background-color: rgb(202, 190, 151);
-    height: 550px;
+    height: auto;
     width: 400px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-radius: 20px;
 }
 
-.card-img{
-    /* margin: 5px; */
-    width: 90%;
-    height: fit-content;
-    border-radius: 10px;
-}
 
 .card h2{
     display: flex;
@@ -55,12 +43,29 @@ body{
 }
 
 
+.carroTotal{
+    margin-right: 30px;
+}
+
+.compraCarroEntradaCantidad{
+    width: 25px;
+}
+
+.cantidadDeEntradasDer{
+    width: 30px;
+    margin-right: 190px;
+}
+
+.cantidadDeEntradasIzq{
+    width: 30px;
+}
+
+
 footer{
     display:flex;
     justify-content: center;
     background-color: rgba(250, 235, 215, 0.589);
 }
-
 
 
 /* a.openModal { 
