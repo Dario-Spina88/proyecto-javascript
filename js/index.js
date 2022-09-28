@@ -63,6 +63,12 @@ const compraCarroEntradasContainer = document.querySelector(
 //------------------Agregar al carrito-------------
 
 function agregarAlCarrito(e) {
+
+// ---------localStorage----------
+    const compraCarroEntradas = entradaCarritoGet()
+    agregarLocalStorage("entrada", compraCarroEntradas)
+// ------------------------------------
+
     const button = e.target;
 
     const card = button.closest(".card");
@@ -75,13 +81,14 @@ function agregarAlCarrito(e) {
     const cardImagen = card.querySelector(".card-img").src;
 
     carritoDeCompras(cardTitulo, cardPrecio, cardImagen);
+
 }
+
 
 function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
 
     const soloUnTitulo = compraCarroEntradasContainer.getElementsByClassName("compraCarroEntradaTitulo");
     
-
     for(let i = 0; i < soloUnTitulo.length; i++){
         if (soloUnTitulo[i].innerText === cardTitulo){
 
@@ -129,13 +136,9 @@ function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
     // ----------boton Eliminar-------------
     filaCompraContenedor.querySelector(".buttonDelete").addEventListener("click",removeCompraDeEntrada);
 
-    // ----------boton de Cantidad-------------
-    filaCompraContenedor.querySelector(".compraCarroEntradaCantidad").addEventListener("change", ()=> console.log("change"))
-
-
-
     compraTotal();
 }
+
 
 // -----------Compra de Carrito----------------
 
@@ -173,6 +176,7 @@ function removeCompraDeEntrada(e){
 function botonDeVaciarClicked(){
     compraCarroEntradasContainer.innerHTML = "";
     compraTotal();
+
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -182,12 +186,9 @@ function botonDeVaciarClicked(){
 
 
 function botonDeCompraClicked(){
-
-    const compraCarroEntradas = entradaCarritoGet()
-    agregarLocalStorage("entrada", compraCarroEntradas)
-
     compraCarroEntradasContainer.innerHTML = "";
     compraTotal();
+
     Swal.fire({
         position: 'center',
         icon: 'success',
@@ -196,9 +197,8 @@ function botonDeCompraClicked(){
         showConfirmButton: false,
         timer: 1500
     })
-    
+        
 }
-
 
 
 function entradaCarritoGet (){
@@ -212,6 +212,7 @@ function entradaCarritoGet (){
 
         const compraCarroEntradaCantidadElement = compraCarroEntrada.querySelector(".compraCarroEntradaCantidad")
         const compraCarroEntradaCantidad = Number(compraCarroEntradaCantidadElement.value)
+
 
         arrayEntrada.push(compraCarroEntradaTitulo)
         arrayEntrada.push(compraCarroEntradaCantidad)
