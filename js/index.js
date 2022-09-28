@@ -1,3 +1,5 @@
+
+
 class Espectaculos {
     constructor(id, titulo, precio, img) {
     this.id = id;
@@ -10,17 +12,12 @@ class Espectaculos {
 // --------------informacion de entradas-------------
 
 let infoEntradas = [];
-infoEntradas.push(
-    new Espectaculos("1", "Teatro Para Niño/a", 4000, "/img/niños.jpg"));
-infoEntradas.push(
-    new Espectaculos("2", "Teatro Para Adulto/a", 5000, "/img/adultos.jpg"));
-infoEntradas.push(
-    new Espectaculos("3", "Teatro Ciego", 4500, "/img/ciego.jpg"));
+infoEntradas.push(new Espectaculos("1", "Teatro Para Niño/a", 4000, "/img/niños.jpg"));
+infoEntradas.push(new Espectaculos("2", "Teatro Para Adulto/a", 5000, "/img/adultos.jpg"));
+infoEntradas.push(new Espectaculos("3", "Teatro Ciego", 4500, "/img/ciego.jpg"));
 infoEntradas.push(new Espectaculos("4", "Festival Electronica", 6000, "/img/electronica.jpg"));
-infoEntradas.push(
-    new Espectaculos("5", "Recital Rock", 4500, "/img/rock.jpg"));
-infoEntradas.push(
-    new Espectaculos("6", "Recital Reggae", 3000, "/img/reggae.jpg"));
+infoEntradas.push(new Espectaculos("5", "Recital Rock", 4500, "/img/rock.jpg"));
+infoEntradas.push(new Espectaculos("6", "Recital Reggae", 3000, "/img/reggae.jpg"));
 
 
 let section = document.getElementById("tarjeta");
@@ -185,6 +182,10 @@ function botonDeVaciarClicked(){
 
 
 function botonDeCompraClicked(){
+
+    const compraCarroEntradas = entradaCarritoGet()
+    agregarLocalStorage("entrada", compraCarroEntradas)
+
     compraCarroEntradasContainer.innerHTML = "";
     compraTotal();
     Swal.fire({
@@ -195,4 +196,30 @@ function botonDeCompraClicked(){
         showConfirmButton: false,
         timer: 1500
     })
+    
+}
+
+
+
+function entradaCarritoGet (){
+    const compraCarroEntradas = document.querySelectorAll(".compraCarroEntrada");
+    const arrayEntrada = [];
+
+    compraCarroEntradas.forEach(compraCarroEntrada =>{
+        
+        const compraCarroEntradaTituloElement = compraCarroEntrada.querySelector(".compraCarroEntradaTitulo")
+        const compraCarroEntradaTitulo = compraCarroEntradaTituloElement.textContent
+
+        const compraCarroEntradaCantidadElement = compraCarroEntrada.querySelector(".compraCarroEntradaCantidad")
+        const compraCarroEntradaCantidad = Number(compraCarroEntradaCantidadElement.value)
+
+        arrayEntrada.push(compraCarroEntradaTitulo)
+        arrayEntrada.push(compraCarroEntradaCantidad)
+    })
+
+    return arrayEntrada;
+}
+
+function agregarLocalStorage(key, titulo){
+    localStorage.setItem(key, JSON.stringify(titulo))
 }
