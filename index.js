@@ -64,17 +64,11 @@ const compraCarroEntradasContainer = document.querySelector(
 
 function agregarAlCarrito(e) {
 
-// ---------localStorage----------
-    const compraCarroEntradas = entradaCarritoGet()
-    agregarLocalStorage("entrada", compraCarroEntradas)
-// ------------------------------------
-
     const button = e.target;
 
     const card = button.closest(".card");
 
     const cardTitulo = card.querySelector(".card-titulo").textContent;
-
     const cardPrecio = card.querySelector(".card-precio").textContent;
     
     // Saque la imagen por ahora 
@@ -82,6 +76,10 @@ function agregarAlCarrito(e) {
 
     carritoDeCompras(cardTitulo, cardPrecio, cardImagen);
 
+// ---------localStorage----------
+const compraCarroEntradas = entradaCarritoGet()
+agregarLocalStorage("entrada", compraCarroEntradas)
+// ------------------------------------
 }
 
 
@@ -96,7 +94,7 @@ function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
             cantidadEntrada.value++;
             compraTotal();
             return;
-        }
+        }    
     }
 
     const filaCompraContenedor = document.createElement("div");
@@ -105,6 +103,7 @@ function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
         <div class="col-6">
             <div class="compra-carro-imagen d-flex align-items-center h-50 border-bottom pb-2 pt-3">
 
+                <img src=${cardImagen} class="compraCarroImagen">
                 <h3 class="compra-carro-titulo compraCarroEntradaTitulo text-truncate ml-3 mb-0">${cardTitulo}</h3>
             </div>
         </div>
@@ -117,13 +116,7 @@ function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
         <div class="col-4">
             <div class="compra-carro-cantitad d-flex align-content-between align-items-center h-50 border-bottom pb-2 pt-3">
 
-
-                <button class="cantidadDeEntradasIzq" type="button">-</button>
-
                 <input class="compra-carro-cantidad-input compraCarroEntradaCantidad" type="number" value="1">
-
-                <button class="cantidadDeEntradasDer" type="button">+</button>
-
 
                 <button class="btn btn-danger buttonDelete" type="button">X</button>
             </div>
@@ -135,6 +128,9 @@ function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
 
     // ----------boton Eliminar-------------
     filaCompraContenedor.querySelector(".buttonDelete").addEventListener("click",removeCompraDeEntrada);
+
+    //----------Flecha para subir y bajar cantidad--------------
+    filaCompraContenedor.querySelector(".compraCarroEntradaCantidad").addEventListener("change", cambiarCantidad);
 
     compraTotal();
 }
@@ -173,6 +169,15 @@ function removeCompraDeEntrada(e){
 }
 
 
+//----------Flecha para subir y bajar cantidad y ternario--------------
+
+function cambiarCantidad(e){
+    const input = e.target;
+    input.value <= 0 ? (input.value = 1) : null;
+    compraTotal();    
+}
+
+
 function botonDeVaciarClicked(){
     compraCarroEntradasContainer.innerHTML = "";
     compraTotal();
@@ -186,6 +191,7 @@ function botonDeVaciarClicked(){
 
 
 function botonDeCompraClicked(){
+
     compraCarroEntradasContainer.innerHTML = "";
     compraTotal();
 
@@ -197,7 +203,6 @@ function botonDeCompraClicked(){
         showConfirmButton: false,
         timer: 1500
     })
-        
 }
 
 
@@ -221,6 +226,6 @@ function entradaCarritoGet (){
     return arrayEntrada;
 }
 
-function agregarLocalStorage(key, titulo){
-    localStorage.setItem(key, JSON.stringify(titulo))
+function agregarLocalStorage(key, cardTitulo){
+    localStorage.setItem(key, JSON.stringify(cardTitulo))
 }

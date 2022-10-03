@@ -13,7 +13,6 @@ body{
     background-attachment: fixed;
 }
 
-
 .card {
     margin: 15px;
     background-color: rgb(202, 190, 151);
@@ -31,6 +30,11 @@ body{
     align-items: center;
 }
 
+.card-img{
+    object-fit: cover;
+    width: 400px;
+}
+
 .btn{
     margin: 5px;
     display:flex;
@@ -42,42 +46,34 @@ body{
     background-color: #ccc;
 }
 
+.compraCarroEntradasContainer img{
+    width: 100px;
+}
 
 .carroTotal{
     margin-right: 30px;
 }
 
 .compraCarroEntradaCantidad{
-    width: 25px;
+    height: 25px;
+    width: 40px;
 }
 
-.cantidadDeEntradasDer{
-    width: 30px;
-    margin-right: 190px;
-}
-
-.cantidadDeEntradasIzq{
+.buttonDelete{
+    height: 25px;
     width: 30px;
 }
 
+.botonDeCompra{
+    width: 100px;
+}
+
+.botonDeVaciar{
+    width: 80px;
+}
 
 footer{
     display:flex;
     justify-content: center;
     background-color: rgba(250, 235, 215, 0.589);
 }
-
-
-/* a.openModal { 
-    margin: 1em auto; 
-    display: block; 
-    width: 200px; 
-    background: #ccc; 
-    text-align: center; 
-    text-decoration: none; 
-    color: black; 
-    padding: 10px; 
-    text-shadow: 0 1px 0 #fff; 
-    border: 1px solid rgba(0,0,0,0.1); 
-    box-shadow: 0 1px 1px rgba(0,0,0,0.3); 
-} */
