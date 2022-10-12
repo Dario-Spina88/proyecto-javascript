@@ -13,6 +13,19 @@ body{
     background-attachment: fixed;
 }
 
+.ingreso{
+    background-color: rgba(204, 204, 204, 0.589);
+}
+
+input:invalid {
+    border: 2px dashed red;
+}
+
+input:valid {
+    border: 2px solid black;
+}
+
+
 .card {
     margin: 15px;
     background-color: rgb(202, 190, 151);

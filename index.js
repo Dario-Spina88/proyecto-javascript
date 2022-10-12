@@ -1,40 +1,31 @@
 
 
-class Espectaculos {
-    constructor(id, titulo, precio, img) {
-    this.id = id;
-    this.titulo = titulo;
-    this.precio = precio;
-    this.img = img;
-    }
-}
-
-// --------------informacion de entradas-------------
-
 let infoEntradas = [];
-infoEntradas.push(new Espectaculos("1", "Teatro Para Niño/a", 4000, "/img/niños.jpg"));
-infoEntradas.push(new Espectaculos("2", "Teatro Para Adulto/a", 5000, "/img/adultos.jpg"));
-infoEntradas.push(new Espectaculos("3", "Teatro Ciego", 4500, "/img/ciego.jpg"));
-infoEntradas.push(new Espectaculos("4", "Festival Electronica", 6000, "/img/electronica.jpg"));
-infoEntradas.push(new Espectaculos("5", "Recital Rock", 4500, "/img/rock.jpg"));
-infoEntradas.push(new Espectaculos("6", "Recital Reggae", 3000, "/img/reggae.jpg"));
 
 
 let section = document.getElementById("tarjeta");
-let temp = document.querySelector("template");
-let card = temp.content.querySelector("article");
 
 
-infoEntradas.forEach((espectaculo) => {
-    let cardClonada = card.cloneNode(true);
-    section.appendChild(cardClonada);
-  // imagen------------------
-    let img = cardClonada.querySelector("img");
-    img.src = espectaculo.img;
+const pedirPosts = async () => {
+    const resp = await fetch("/data.json")
+    const data = await resp.json()
 
-    cardClonada.children[1].innerText = espectaculo.titulo;
-    cardClonada.children[2].innerText = espectaculo.precio;
-});
+    data.forEach((entrada)=>{
+                    const {id, titulo, precio, img} = entrada
+                    const entradaHTML = `
+                        <article class="card h-100">
+                            <img src="${img}" class="card-img" alt="" />
+                            <h2 class="card-titulo">${titulo}</h2>
+                            <p class="card-precio">$${precio}</p>
+                            <button id="comprar" class="btn btn-primary" type="button(${id})">AÑADIR AL CARRITO</button>
+                        </article>
+                `
+                section.innerHTML += entradaHTML
+    })
+}
+
+pedirPosts()
+
 
 //-------------Boton agregar al carrito------------------
 
@@ -102,12 +93,10 @@ function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
     <div class="row compraCarroEntrada">
         <div class="col-6">
             <div class="compra-carro-imagen d-flex align-items-center h-50 border-bottom pb-2 pt-3">
-
                 <img src=${cardImagen} class="compraCarroImagen">
                 <h3 class="compra-carro-titulo compraCarroEntradaTitulo text-truncate ml-3 mb-0">${cardTitulo}</h3>
             </div>
         </div>
-
         <div class="col-2">
             <div class="compra-carro-precio d-flex align-items-center h-50 border-bottom pb-2 pt-3">
                 <p class="card-precio mb-0 compraCarroEntradaPrecio">${cardPrecio}</p>
@@ -115,9 +104,7 @@ function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
         </div>
         <div class="col-4">
             <div class="compra-carro-cantitad d-flex align-content-between align-items-center h-50 border-bottom pb-2 pt-3">
-
                 <input class="compra-carro-cantidad-input compraCarroEntradaCantidad" type="number" value="1">
-
                 <button class="btn btn-danger buttonDelete" type="button">X</button>
             </div>
         </div>  
