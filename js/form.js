@@ -1,5 +1,4 @@
 
-
 const email = document.getElementById("mail");
 
 email.addEventListener("input", (event) => {
@@ -12,7 +11,16 @@ email.addEventListener("input", (event) => {
 });
 
 
-//-------------------Logear usuario tomar datos---------------------
+//-----------------buscador--------------
+
+const buscador = document.querySelector("#buscar")
+
+buscador.addEventListener("input", (e)=>{
+    console.log(e.target.value)
+})
+
+
+//-------------------Logear usuario / tomar datos---------------------
 
 const usuarioLogeado = document.querySelector("#usuarioLogeado")
 
@@ -28,7 +36,7 @@ contraseniaLogeado.addEventListener("input", (e)=>{
 })
 
 
-//--------------------Crear Usuario tomar datos---------------------
+//--------------------Crear Usuario / tomar datos---------------------
 
 const nombreCrear = document.querySelector("#nombres")
 nombreCrear.addEventListener("input", (e)=>{
@@ -120,11 +128,34 @@ document.querySelector("#iniciar").addEventListener("click", (e)=>{
 })
 
 
-const botonCancelar = document.querySelector("#cancelar") 
+const botonCancelar = document.querySelector("#cancelar") ;
 botonCancelar.onclick = function(){
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Cancelo Usuario',
     })
+}
+
+//------------validar formularios--------------
+
+
+//form logeo
+let miFormularioLogeo = document.getElementById("formLogeo");
+formLogeo.addEventListener("submit", validarformLogeo);
+
+function validarformLogeo (e){
+    e.preventDefault();
+    console.log("Formulario Enviado");
+}
+
+
+//form crear
+
+let miFormularioCrear = document.getElementById("formCrear");
+formCrear.addEventListener("submit", validarformCrear);
+
+function validarformCrear (e){
+    e.preventDefault();
+    console.log("Formulario Enviado");
 }

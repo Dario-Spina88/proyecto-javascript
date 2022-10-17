@@ -31,9 +31,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="./page/entradas.html">Entradas</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../ejemplo.html">ejemplo</a>
-                        </li>
                     </ul>
                     <form class="d-flex" role="search">
                         <input id="buscar" class="form-control me-2" type="search" placeholder="Buscar"
@@ -53,7 +50,7 @@
             <div class="ingreso m-5">
                 <h2 class="display-3 m-5 text-center">Ingreso del Usuario</h2>
 
-                <form>
+                <form id="formLogeo">
 
                     <div class="form-floating mb-3">
                         <input id="usuarioLogeado" type="text" class="form-control" placeholder="Usuario" required
@@ -78,7 +75,7 @@
             <div class="ingreso mb-5">
                 <h2 class="display-3 m-5 text-center">Crear Usuario</h2>
 
-                <form>
+                <form id="formCrear">
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">Nombre y Apellido</span>
@@ -94,7 +91,7 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">Telefono</span>
-                        <input id="tel" type="tel" name="tel" class="form-control" placeholder="Telefono" aria-label="Username" required />
+                        <input id="tel" type="number" name="tel" class="form-control" placeholder="Telefono" aria-label="Username" required />
                     </div>
 
                     <div class="form-floating mb-3">

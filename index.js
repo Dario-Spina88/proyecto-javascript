@@ -1,30 +1,40 @@
+document.addEventListener("DOMContentLoaded", ()=>{
+    dataFetch();
+})
 
-
-let infoEntradas = [];
 
 
 let section = document.getElementById("tarjeta");
 
+let infoEntradas = [];
 
-const pedirPosts = async () => {
-    const resp = await fetch("/data.json")
-    const data = await resp.json()
+async function dataFetch () {
+    const resp = await fetch("/data.json");
+    const data = await resp.json();
+    infoEntradas = data;
+    listaEntradas()
+}
 
-    data.forEach((entrada)=>{
-                    const {id, titulo, precio, img} = entrada
-                    const entradaHTML = `
+function listaEntradas() {
+    infoEntradas.forEach((entrada)=>{
+        let cardEntrada = document.createElement("div")
+        cardEntrada.innerHTML += `
+                    <div>
                         <article class="card h-100">
-                            <img src="${img}" class="card-img" alt="" />
-                            <h2 class="card-titulo">${titulo}</h2>
-                            <p class="card-precio">$${precio}</p>
-                            <button id="comprar" class="btn btn-primary" type="button(${id})">AÑADIR AL CARRITO</button>
+                            <img src="${entrada.img}" class="card-img" alt="" />
+                            <h2 class="card-titulo">${entrada.titulo}</h2>
+                            <p class="card-precio">$${entrada.precio}</p>
+                            <button data-id="${entrada.id}" id="comprar${entrada.id}" class="btn btn-primary" type="button">AÑADIR AL CARRITO</button>
                         </article>
+                    </div>
                 `
-                section.innerHTML += entradaHTML
+                section.appendChild(cardEntrada)
     })
 }
 
-pedirPosts()
+
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 
 
 //-------------Boton agregar al carrito------------------
@@ -62,7 +72,6 @@ function agregarAlCarrito(e) {
     const cardTitulo = card.querySelector(".card-titulo").textContent;
     const cardPrecio = card.querySelector(".card-precio").textContent;
     
-    // Saque la imagen por ahora 
     const cardImagen = card.querySelector(".card-img").src;
 
     carritoDeCompras(cardTitulo, cardPrecio, cardImagen);
@@ -71,35 +80,40 @@ function agregarAlCarrito(e) {
 const compraCarroEntradas = entradaCarritoGet()
 agregarLocalStorage("entrada", compraCarroEntradas)
 // ------------------------------------
+
 }
 
 
-function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
 
-    const soloUnTitulo = compraCarroEntradasContainer.getElementsByClassName("compraCarroEntradaTitulo");
+
+// function carritoDeCompras(cardTitulo, cardPrecio, cardImagen) {
+
+//     const soloUnTitulo = compraCarroEntradasContainer.getElementsByClassName("compraCarroEntradaTitulo");
     
-    for(let i = 0; i < soloUnTitulo.length; i++){
-        if (soloUnTitulo[i].innerText === cardTitulo){
+//     for(let i = 0; i < soloUnTitulo.length; i++){
+//         if (soloUnTitulo[i].innerText === cardTitulo){
 
-            const cantidadEntrada = soloUnTitulo[i].parentElement.parentElement.parentElement.querySelector(".compraCarroEntradaCantidad");
-            cantidadEntrada.value++;
-            compraTotal();
-            return;
-        }    
-    }
+//             const cantidadEntrada = soloUnTitulo[i].parentElement.parentElement.parentElement.querySelector(".compraCarroEntradaCantidad");
+//             cantidadEntrada.value++;
+//             compraTotal();
+//             return;
+//         }    
+//     }
+
+function carritoDeCompras(entrada){
 
     const filaCompraContenedor = document.createElement("div");
     const compraCarroContenedor = `
     <div class="row compraCarroEntrada">
         <div class="col-6">
             <div class="compra-carro-imagen d-flex align-items-center h-50 border-bottom pb-2 pt-3">
-                <img src=${cardImagen} class="compraCarroImagen">
-                <h3 class="compra-carro-titulo compraCarroEntradaTitulo text-truncate ml-3 mb-0">${cardTitulo}</h3>
+                <img src=${entrada.img} class="compraCarroImagen">
+                <h3 class="compra-carro-titulo compraCarroEntradaTitulo text-truncate ml-3 mb-0">${entrada.titulo}</h3>
             </div>
         </div>
         <div class="col-2">
             <div class="compra-carro-precio d-flex align-items-center h-50 border-bottom pb-2 pt-3">
-                <p class="card-precio mb-0 compraCarroEntradaPrecio">${cardPrecio}</p>
+                <p class="card-precio mb-0 compraCarroEntradaPrecio">${entrada.precio}</p>
             </div>
         </div>
         <div class="col-4">
@@ -145,6 +159,7 @@ function compraTotal(){
     });
 
     compraDelTotal.innerHTML = `$${total}`
+    
 }
 
 
@@ -185,7 +200,7 @@ function botonDeCompraClicked(){
     Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Compra su entrada',
+        title: 'Compro su entrada',
         text: 'Espere email con las entradas',
         showConfirmButton: false,
         timer: 1500
@@ -212,6 +227,7 @@ function entradaCarritoGet (){
 
     return arrayEntrada;
 }
+
 
 function agregarLocalStorage(key, cardTitulo){
     localStorage.setItem(key, JSON.stringify(cardTitulo))
