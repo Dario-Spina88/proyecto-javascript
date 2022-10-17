@@ -25,7 +25,6 @@ input:valid {
     border: 2px solid black;
 }
 
-
 .card {
     margin: 15px;
     background-color: rgb(202, 190, 151);
@@ -35,7 +34,6 @@ input:valid {
     justify-content: space-around;
     align-items: center;
 }
-
 
 .card h2{
     display: flex;

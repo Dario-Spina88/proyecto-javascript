@@ -6,31 +6,31 @@
         "img": "/img/niños.jpg"
     },
     {
-        "id": 1,
+        "id": 2,
         "titulo": "Teatro Para Adulto/a",
         "precio": 5000,
         "img": "/img/adultos.jpg"
     },
     {
-        "id": 1,
+        "id": 3,
         "titulo": "Teatro Ciego",
         "precio": 4500,
         "img": "/img/ciego.jpg"
     },
     {
-        "id": 1,
+        "id": 4,
         "titulo": "Festival Electronica",
         "precio": 6000,
         "img": "/img/electronica.jpg"
     },
     {
-        "id": 1,
+        "id": 5,
         "titulo": "Recital Rock",
         "precio": 4500,
         "img": "/img/rock.jpg"
     },
     {
-        "id": 1,
+        "id": 6,
         "titulo": "Recital Reggae",
         "precio": 3000,
         "img": "/img/reggae.jpg"
