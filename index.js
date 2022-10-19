@@ -38,7 +38,7 @@ function listaEntradas() {
           precio: entrada.precio,
           img: entrada.img,
         });
-        localStorage.setItem("carrito_daro", JSON.stringify(carrito));
+        localStorage.setItem("carrito", JSON.stringify(carrito));
         carritoDeCompras();
       }
     });
@@ -55,9 +55,6 @@ botonDeCompra.addEventListener("click", botonDeCompraClicked);
 
 const botonDeVaciar = document.querySelector(".botonDeVaciar");
 botonDeVaciar.addEventListener("click", botonDeVaciarClicked);
-
-
-
 
 
 //------------------Agregar al carrito-------------
@@ -95,9 +92,7 @@ function carritoDeCompras() {
       .addEventListener("click", removeCompraDeEntrada);
 
     //----------Flecha para subir y bajar cantidad--------------
-    filaCompraContenedor
-      .querySelector(".compraCarroEntradaCantidad")
-      .addEventListener("change", cambiarCantidad);
+    filaCompraContenedor.querySelector(".compraCarroEntradaCantidad").addEventListener("change", cambiarCantidad);
 
     compraTotal();
   });
@@ -204,8 +199,8 @@ function entradaCarritoGet() {
 document.addEventListener("DOMContentLoaded", () => {
   dataFetch();
 
-  if (localStorage.getItem("carrito_daro")) {
-    carrito = JSON.parse(localStorage.getItem("carrito_daro"));
+  if (localStorage.getItem("carrito")) {
+    carrito = JSON.parse(localStorage.getItem("carrito"));
     carritoDeCompras();
   } else {
     carrito = [];
